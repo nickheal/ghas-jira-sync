@@ -5,7 +5,7 @@ name: Sync Security Alerts (Advanced)
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # Every 6 hours
+    - cron: '0 */6 * * *' # Every 6 hours
   workflow_dispatch:
     inputs:
       dry-run:
@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Sync GHAS to Jira
-        uses: nickhealDD/ghas-jira-sync@v1
+        uses: nickheal/ghas-jira-sync@v1
         with:
           # Optional: Override auto-detected repo
           owner: myorg

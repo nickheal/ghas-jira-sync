@@ -27,8 +27,8 @@ name: Sync Security Alerts to Jira
 
 on:
   schedule:
-    - cron: '0 9 * * *'  # Daily at 9 AM UTC
-  workflow_dispatch:      # Allows manual trigger
+    - cron: '0 9 * * *' # Daily at 9 AM UTC
+  workflow_dispatch: # Allows manual trigger
 
 jobs:
   sync:
@@ -39,7 +39,7 @@ jobs:
 
     steps:
       - name: Sync GHAS to Jira
-        uses: nickhealDD/ghas-jira-sync@v1
+        uses: nickheal/ghas-jira-sync@v1
         with:
           jira-project: ${{ vars.JIRA_PROJECT }}
           jira-epic: ${{ vars.JIRA_EPIC }}
@@ -58,20 +58,20 @@ jobs:
 
 Click the **"Secrets"** tab, then **"New repository secret"** and add these:
 
-| Secret Name | Value | Example |
-|-------------|-------|---------|
-| `JIRA_HOST` | Your Jira URL | `https://company.atlassian.net` |
-| `JIRA_EMAIL` | Your Jira email | `you@company.com` |
-| `JIRA_API_TOKEN` | Token from Step 1 | `ATATT3xFf...` |
+| Secret Name      | Value             | Example                         |
+| ---------------- | ----------------- | ------------------------------- |
+| `JIRA_HOST`      | Your Jira URL     | `https://company.atlassian.net` |
+| `JIRA_EMAIL`     | Your Jira email   | `you@company.com`               |
+| `JIRA_API_TOKEN` | Token from Step 1 | `ATATT3xFf...`                  |
 
 ### Add Variables (non-sensitive config)
 
 Click the **"Variables"** tab, then **"New repository variable"** and add these:
 
-| Variable Name | Value | Example |
-|---------------|-------|---------|
-| `JIRA_PROJECT` | Your Jira project key | `PROJ` |
-| `JIRA_EPIC` | Your epic ticket ID | `PROJ-123` |
+| Variable Name  | Value                 | Example    |
+| -------------- | --------------------- | ---------- |
+| `JIRA_PROJECT` | Your Jira project key | `PROJ`     |
+| `JIRA_EPIC`    | Your epic ticket ID   | `PROJ-123` |
 
 > **Why separate secrets and variables?** Secrets are encrypted and hidden (for credentials). Variables are visible and easier to edit (for configuration like project keys).
 
@@ -145,6 +145,7 @@ Secret scanning requires GitHub Advanced Security for private repos. This is nor
 ### "No alerts found"
 
 Make sure:
+
 - Dependabot is enabled in **Settings** → **Security** → **Dependabot**
 - Code Scanning is enabled in **Settings** → **Security** → **Code scanning**
 - Your repo has actual vulnerabilities to report
@@ -169,4 +170,4 @@ See the [.github/workflows](.github/workflows) folder for more examples:
 
 - Check the [main README](README.md) for detailed documentation
 - See [example workflows](.github/workflows)
-- [Open an issue](https://github.com/nickhealDD/ghas-jira-sync/issues) if you're stuck
+- [Open an issue](https://github.com/nickheal/ghas-jira-sync/issues) if you're stuck
