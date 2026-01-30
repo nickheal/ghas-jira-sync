@@ -221,7 +221,7 @@ Go to **Settings** → **Secrets and variables** → **Actions**:
 **Secrets tab** (sensitive credentials):
 1. **JIRA_HOST** - Your Jira URL (e.g., `https://company.atlassian.net`)
 2. **JIRA_EMAIL** - Your Jira email
-3. **JIRA_API_TOKEN** - [Create a token here](https://id.atlassian.com/manage-profile/security/api-tokens)
+3. **JIRA_API_TOKEN** - [Create an API token](https://id.atlassian.com/manage-profile/security/api-tokens) or use a Personal Access Token (see [Jira Permissions](#jira-permissions))
 
 **Variables tab** (non-sensitive config):
 1. **JIRA_PROJECT** - Your Jira project key (e.g., `PROJ`)
@@ -233,18 +233,41 @@ Go to **Settings** → **Secrets and variables** → **Actions**:
 
 The Jira user account (associated with the API token) needs specific permissions to create and manage tickets.
 
-#### Required Jira API Token
+#### Authentication Options
+
+Jira supports multiple authentication methods with different scope capabilities:
+
+**Option 1: API Token (Simplest)**
 
 1. **Create an API token**: Go to [Atlassian API Tokens](https://id.atlassian.com/manage-profile/security/api-tokens)
 2. Click **Create API token**
 3. Give it a name (e.g., "GHAS Jira Sync")
 4. Copy the token and save it as `JIRA_API_TOKEN` secret in GitHub
 
-> **Note:** Jira API tokens inherit the permissions of the user account that created them. The token itself doesn't have separate scopes.
+> **Note:** Basic API tokens inherit ALL permissions from the user account. They cannot be scoped to specific permissions.
 
-#### Required Project Permissions
+**Option 2: Personal Access Token (Recommended for Production)**
 
-The Jira user account must have these permissions in the target project:
+For better security, use a Personal Access Token (PAT) with scoped permissions:
+
+1. Go to your Jira instance → **Settings** → **Personal Access Tokens** (requires Jira admin permissions to enable)
+2. Create a new token with these **minimum required scopes**:
+   - `read:jira-work` - Read projects, issues, and epics
+   - `write:jira-work` - Create and edit issues
+3. Copy the token and save it as `JIRA_API_TOKEN` secret in GitHub
+
+**Minimum Required Scopes for PAT:**
+- ✅ `read:jira-work` - Browse projects and search for existing tickets
+- ✅ `write:jira-work` - Create new issues and link to epics
+
+**Optional Scopes (for future features):**
+- `read:jira-user` - Read user information (for assignee features)
+
+> **Why use PAT over API Token?** PATs can be scoped to specific permissions, following the principle of least privilege. If your organization requires token scoping, use PAT instead of basic API tokens.
+
+#### Required Project Permissions (User Account Level)
+
+Regardless of which authentication method you use, the Jira user account must have these permissions in the target project:
 
 | Permission | Required For | How to Check |
 |------------|--------------|--------------|
