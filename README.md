@@ -30,7 +30,7 @@ jobs:
 
       # Sync GHAS alerts to Jira
       - name: Sync GHAS to Jira
-        uses: nickhealDD/ghas-jira-sync@v1
+        uses: nickheal/ghas-jira-sync@v1
         with:
           github-token: ${{ steps.generate-token.outputs.token }}
           jira-project: ${{ vars.JIRA_PROJECT }}
@@ -112,7 +112,7 @@ jobs:
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Sync GHAS to Jira
-        uses: nickhealDD/ghas-jira-sync@v1
+        uses: nickheal/ghas-jira-sync@v1
         with:
           github-token: ${{ steps.generate-token.outputs.token }}
           # ... other inputs
@@ -150,7 +150,7 @@ If you can't use a GitHub App, use a fine-grained PAT with a short expiration.
 
 ```yaml
 - name: Sync GHAS to Jira
-  uses: nickhealDD/ghas-jira-sync@v1
+  uses: nickheal/ghas-jira-sync@v1
   with:
     github-token: ${{ secrets.GH_SECURITY_TOKEN }}
     # ... other inputs
@@ -347,7 +347,7 @@ jobs:
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Sync GHAS to Jira
-        uses: nickhealDD/ghas-jira-sync@v1
+        uses: nickheal/ghas-jira-sync@v1
         with:
           github-token: ${{ steps.generate-token.outputs.token }}
           jira-project: ${{ vars.JIRA_PROJECT }}
@@ -376,7 +376,7 @@ jobs:
       contents: read
     steps:
       - name: Sync GHAS to Jira
-        uses: nickhealDD/ghas-jira-sync@v1
+        uses: nickheal/ghas-jira-sync@v1
         with:
           github-token: ${{ secrets.GH_SECURITY_TOKEN }}
           jira-project: ${{ vars.JIRA_PROJECT }}
@@ -392,7 +392,7 @@ You can hardcode values instead of using repository variables:
 
 ```yaml
 - name: Sync GHAS to Jira
-  uses: nickhealDD/ghas-jira-sync@v1
+  uses: nickheal/ghas-jira-sync@v1
   with:
     github-token: ${{ steps.generate-token.outputs.token }}
     jira-project: PROJ      # Hardcoded
@@ -431,7 +431,7 @@ jobs:
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Sync GHAS to Jira
-        uses: nickhealDD/ghas-jira-sync@v1
+        uses: nickheal/ghas-jira-sync@v1
         with:
           github-token: ${{ steps.generate-token.outputs.token }}
           dry-run: ${{ inputs.dry-run || false }}
@@ -461,7 +461,7 @@ jobs:
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Sync frontend
-        uses: nickhealDD/ghas-jira-sync@v1
+        uses: nickheal/ghas-jira-sync@v1
         with:
           github-token: ${{ steps.token.outputs.token }}
           owner: myorg
@@ -485,7 +485,7 @@ jobs:
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Sync backend
-        uses: nickhealDD/ghas-jira-sync@v1
+        uses: nickheal/ghas-jira-sync@v1
         with:
           github-token: ${{ steps.token.outputs.token }}
           owner: myorg
