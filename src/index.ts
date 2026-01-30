@@ -78,6 +78,16 @@ if (isGitHubAction) {
   console.log('  jira-email:', getInput('jira-email') ? '[SET]' : '[NOT SET]');
   console.log('  jira-api-token:', getInput('jira-api-token') ? '[SET]' : '[NOT SET]');
 
+  // Debug: Log all INPUT_* environment variables
+  console.log('\nDEBUG: All INPUT_* environment variables:');
+  Object.keys(process.env)
+    .filter(key => key.startsWith('INPUT_'))
+    .forEach(key => {
+      const value = process.env[key];
+      const displayValue = value && value.length > 0 ? '[SET]' : '[EMPTY]';
+      console.log(`  ${key}: ${displayValue}`);
+    });
+
   // Set Jira env vars if provided via inputs
   if (getInput('jira-host')) {
     process.env.JIRA_HOST = getInput('jira-host');
